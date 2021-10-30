@@ -25,6 +25,17 @@ npm i @squareboat/nest-cache
 # yarn
 yarn add @squareboat/nest-cache
 ```
+
+For NestJS v6.7.x, please do
+
+```py
+# npm
+npm i @squareboat/nest-cache^0.0.1
+
+# yarn
+yarn add @squareboat/nest-cache^0.0.1
+```
+
 ## Configuration
 Now that the installation is done, you need to configure the package as mentioned below.
 
