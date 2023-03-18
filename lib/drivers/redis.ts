@@ -1,8 +1,8 @@
-import * as IORedis from "ioredis";
+import IORedis from "ioredis";
 import { CacheDriver, RedisDriverOption } from "../interfaces";
 
 export class RedisDriver implements CacheDriver {
-  private client: IORedis.Redis;
+  private client: IORedis;
 
   constructor(private options: RedisDriverOption) {
     this.client = new IORedis({
