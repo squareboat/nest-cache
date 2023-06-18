@@ -45,18 +45,26 @@ export class RedisDriver implements CacheDriver {
     const exists = await this.has(key);
     if (exists) return this.get(key);
 
-    const response = await cb();
-    await this.set(key, response, ttlInSec);
-    return response;
+    try {
+      const response = await cb();
+      await this.set(key, response);
+      return response;
+    } catch (e) {
+      throw e;
+    }
   }
 
   async rememberForever<T>(key: string, cb: Function): Promise<T> {
     const exists = await this.has(key);
     if (exists) return this.get(key);
 
-    const response = await cb();
-    await this.set(key, response);
-    return response;
+    try {
+      const response = await cb();
+      await this.set(key, response);
+      return response;
+    } catch (e) {
+      throw e;
+    }
   }
 
   async forget(key: string): Promise<void> {
