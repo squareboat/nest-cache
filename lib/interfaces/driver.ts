@@ -23,9 +23,9 @@ export interface CacheDriver {
    */
   has(key: string): Promise<boolean>;
 
-  remember(key: string, cb: Function, ttlInSec: number): Promise<void>;
+  remember<T>(key: string, cb: Function, ttlInSec: number): Promise<T>;
 
-  rememberForever(key: string, cb: Function): Promise<void>;
+  rememberForever<T>(key: string, cb: Function): Promise<T>;
 
   forget(key: string): Promise<void>;
 }

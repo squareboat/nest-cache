@@ -41,20 +41,22 @@ export class RedisDriver implements CacheDriver {
     return !!num;
   }
 
-  async remember(key: string, cb: Function, ttlInSec: number): Promise<void> {
+  async remember<T>(key: string, cb: Function, ttlInSec: number): Promise<T> {
     const exists = await this.has(key);
     if (exists) return this.get(key);
 
     const response = await cb();
     await this.set(key, response, ttlInSec);
+    return response;
   }
 
-  async rememberForever(key: string, cb: Function): Promise<void> {
+  async rememberForever<T>(key: string, cb: Function): Promise<T> {
     const exists = await this.has(key);
     if (exists) return this.get(key);
 
     const response = await cb();
     await this.set(key, response);
+    return response;
   }
 
   async forget(key: string): Promise<void> {
