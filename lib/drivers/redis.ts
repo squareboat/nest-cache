@@ -5,12 +5,7 @@ export class RedisDriver implements CacheDriver {
   private client: IORedis;
 
   constructor(private options: RedisDriverOption) {
-    this.client = new IORedis({
-      host: options.host,
-      port: options.port,
-      password: options.password,
-      db: options.database,
-    });
+    this.client = new IORedis({ ...options });
   }
 
   async get(key: string): Promise<any> {
