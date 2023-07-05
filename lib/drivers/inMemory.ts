@@ -48,6 +48,9 @@ export class InMemoryDriver implements CacheDriver {
   }
 
   async rememberForever<T>(key: string, cb: Function): Promise<T> {
+    const exists = await this.has(key);
+    if (exists) return this.get(key);
+
     try {
       const response = await cb();
       await this.set(key, response);
