@@ -26,6 +26,7 @@ export class RedisDriver implements CacheDriver {
     const redisKey = `${this.options.prefix}:::${key}`;
     if (ttlInSec) {
       await this.client.set(redisKey, JSON.stringify(value), "EX", ttlInSec);
+      return;
     }
 
     await this.client.set(redisKey, JSON.stringify(value));
