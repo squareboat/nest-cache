@@ -6,11 +6,16 @@ export interface RedisDriverOption extends RedisOptions {
   prefix: string;
 }
 
+export interface InMemoryDriverOption {
+  driver: "memory";
+  prefix: string;
+}
+
 export interface CacheOptions {
   isGlobal?: boolean;
   default: string;
   stores: {
-    [key: string]: RedisDriverOption;
+    [key: string]: RedisDriverOption | InMemoryDriverOption;
   };
 }
 

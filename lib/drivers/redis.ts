@@ -42,7 +42,7 @@ export class RedisDriver implements CacheDriver {
 
     try {
       const response = await cb();
-      await this.set(key, response);
+      await this.set(key, response, ttlInSec);
       return response;
     } catch (e) {
       throw e;
