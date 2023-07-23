@@ -1,4 +1,4 @@
-import { CacheOptionsFactory, ModuleMetadata, Type } from "@nestjs/common";
+import {  ModuleMetadata, Type } from "@nestjs/common";
 import { RedisOptions } from "ioredis";
 
 export interface RedisDriverOption extends RedisOptions {
@@ -27,7 +27,7 @@ export interface CacheAsyncOptions extends Pick<ModuleMetadata, "imports"> {
   name?: string;
   isGlobal: boolean;
   useExisting?: Type<CacheOptions>;
-  useClass?: Type<CacheOptionsFactory>;
+  useClass?: Type<CacheAsyncOptionsFactory>;
   useFactory?: (...args: any[]) => Promise<CacheOptions> | CacheOptions;
   inject?: any[];
 }
