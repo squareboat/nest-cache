@@ -28,4 +28,6 @@ export interface CacheDriver {
   rememberForever<T>(key: string, cb: Function): Promise<T>;
 
   forget(key: string): Promise<void>;
+
+  getClient<T>(): T;
 }

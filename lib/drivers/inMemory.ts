@@ -65,4 +65,8 @@ export class InMemoryDriver implements CacheDriver {
     await this.client.del(cacheKey);
     throw new Error("Method not implemented.");
   }
+
+  getClient<T>(): T {
+    return this.client as unknown as T;
+  }
 }

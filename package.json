@@ -1,6 +1,6 @@
 {
   "name": "@squareboat/nest-cache",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "description": "The cache package for your NestJS Applications",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

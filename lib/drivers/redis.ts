@@ -70,4 +70,8 @@ export class RedisDriver implements CacheDriver {
   private storeKey(key: string): string {
     return `${this.options.prefix}:::${key}`;
   }
+
+  getClient<T>(): T {
+    return this.client as unknown as T;
+  }
 }
