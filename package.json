@@ -1,6 +1,6 @@
 {
   "name": "@squareboat/nest-cache",
-  "version": "0.2.9",
+  "version": "0.3.0",
   "description": "The cache package for your NestJS Applications",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -17,7 +17,7 @@
     "url": "https://github.com/squareboat/nest-cache/issues"
   },
   "homepage": "https://squareboat.com/open-source/nest-cache/",
-  "author": "Vinayak Sarawagi <vinayaksarawagi25@gmail.com>",
+  "author": "Squareboat <hi@squareboat.com>",
   "private": false,
   "license": "MIT",
   "scripts": {
@@ -29,22 +29,27 @@
     "prepublish:next": "npm run build",
     "publish:next": "npm publish --access public --tag next",
     "test:e2e": "jest --config ./tests/jest-e2e.json --runInBand",
-    "test:e2e:dev": "jest --config ./tests/jest-e2e.json --runInBand --watch"
+    "test:e2e:dev": "jest --config ./tests/jest-e2e.json --runInBand --watch",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
-    "@nestjs/common": "^9.3.10",
-    "@nestjs/core": "^9.3.10",
-    "@types/ioredis": "^5.0.0",
-    "@types/node": "^20.3.3",
-    "reflect-metadata": "^0.1.13",
-    "typescript": "^4.4.4"
+    "@nestjs/common": "^12.3.2",
+    "@nestjs/core": "^12.3.2",
+    "@types/node": "^20.19.43",
+    "node-cache": "^5.1.2",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2",
+    "typescript": "^6.0.3"
   },
   "peerDependencies": {
-    "@nestjs/common": "^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0",
-    "@nestjs/core": "^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0",
-    "reflect-metadata": "^0.1.13"
+    "@nestjs/common": "^10.0.0 || ^11.0.0 || ^12.0.0",
+    "@nestjs/core": "^10.0.0 || ^11.0.0 || ^12.0.0",
+    "reflect-metadata": "^0.1.13 || ^0.2.0"
   },
   "dependencies": {
-    "ioredis": "^5.3.1"
+    "ioredis": "^6.0.0"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }
