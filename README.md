@@ -27,7 +27,7 @@ npm i @squareboat/nest-cache
 yarn add @squareboat/nest-cache
 ```
 
-Requires Node.js 20+ and NestJS 10, 11 or 12. The Redis store uses ioredis 6, which speaks RESP3 by default (Redis 6+); pass `protocol: 2` in the store options for older servers.
+Requires Node.js 20.19+ or 22.12+ and NestJS 10, 11 or 12. The Redis store uses ioredis 6, which speaks RESP3 by default (Redis 6+); pass `protocol: 2` in the store options for older servers.
 
 For NestJS v7 to v9, use `@squareboat/nest-cache@0.2.9`. For NestJS v6.7.x, please do
 
