@@ -26,7 +26,7 @@ export interface CacheAsyncOptionsFactory {
 export interface CacheAsyncOptions extends Pick<ModuleMetadata, "imports"> {
   name?: string;
   isGlobal: boolean;
-  useExisting?: Type<CacheOptions>;
+  useExisting?: Type<CacheAsyncOptionsFactory>;
   useClass?: Type<CacheAsyncOptionsFactory>;
   useFactory?: (...args: any[]) => Promise<CacheOptions> | CacheOptions;
   inject?: any[];

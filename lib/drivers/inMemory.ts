@@ -7,7 +7,8 @@ export class InMemoryDriver implements CacheDriver {
   constructor(private options: InMemoryDriverOption) {
     const NodeCache = loadPackage("node-cache", "@squareboat/nest-cache");
 
-    this.client = new NodeCache({ stdTTL: 100, checkperiod: 120 });
+    // stdTTL 0: keys set without a ttl never expire (it was 100 seconds)
+    this.client = new NodeCache({ stdTTL: 0, checkperiod: 120 });
   }
 
   async get<T>(key: string): Promise<T> {
@@ -40,7 +41,7 @@ export class InMemoryDriver implements CacheDriver {
 
     try {
       const response = await cb();
-      await this.set(key, response);
+      await this.set(key, response, ttlInSec);
       return response;
     } catch (e) {
       throw e;
@@ -63,7 +64,6 @@ export class InMemoryDriver implements CacheDriver {
   async forget(key: string): Promise<void> {
     const cacheKey = `${this.options.prefix}:::${key}`;
     await this.client.del(cacheKey);
-    throw new Error("Method not implemented.");
   }
 
   getClient<T>(): T {

@@ -27,7 +27,9 @@ npm i @squareboat/nest-cache
 yarn add @squareboat/nest-cache
 ```
 
-For NestJS v6.7.x, please do
+Requires Node.js 20.19+ or 22.12+ and NestJS 10, 11 or 12. The Redis store uses ioredis 6, which supports Redis 6.2 and later (ioredis 5 also supported older servers). The in-memory store (`driver: "memory"`) needs `node-cache`: `npm i node-cache`.
+
+For NestJS v7 to v9, use `@squareboat/nest-cache@0.2.9`. For NestJS v6.7.x, please do
 
 ```py
 # npm
@@ -48,7 +50,7 @@ You can register the cache module like below
 ```typescript
 // src/app.module.ts
 import { Module } from "@nestjs/common";
-import { CacheModule } from "@libs/cache";
+import { CacheModule } from "@squareboat/nest-cache";
 
 @Module({
   imports: [
@@ -60,7 +62,7 @@ import { CacheModule } from "@libs/cache";
           host: process.env.REDIS_HOST,
           password: process.env.REDIS_PASSWORD,
           port: process.env.REDIS_PORT || 6379,
-          database: process.env.REDIS_DB || 0,
+          db: Number(process.env.REDIS_DB || 0),
           prefix: "nestjs_boilerplate",
         },
       },
@@ -81,7 +83,7 @@ You need to create a file, `config/cache.ts`
 
 import { registerAs } from "@nestjs/config";
 import { basePath } from "@libs/core";
-import { CacheOptions } from "@libs/cache";
+import { CacheOptions } from "@squareboat/nest-cache";
 
 export default registerAs(
   "cache",
@@ -94,7 +96,7 @@ export default registerAs(
           host: process.env.REDIS_HOST || "127.0.0.1",
           password: process.env.REDIS_PASSWORD || undefined,
           port: process.env.REDIS_PORT || 6379,
-          database: process.env.REDIS_DB || 0,
+          db: Number(process.env.REDIS_DB || 0),
           prefix: "nestjs_boilerplate",
         },
       },
@@ -107,7 +109,7 @@ export default registerAs(
 import { Module } from "@nestjs/common";
 import { ConfigModule, ConfigService } from "@nestjs/config";
 import config from "@config/index";
-import { CacheModule } from "@libs/cache";
+import { CacheModule } from "@squareboat/nest-cache";
 
 @Module({
   imports: [
@@ -158,7 +160,7 @@ await CacheStore().set("reset_password_token", "abcdef12345678", 120);
 To fetch the data from store, you can use `.get()` method.
 
 ```typescript
-await CacheStore().set("reset_password_token");
+await CacheStore().get("reset_password_token");
 // will return 'abcd123456'
 ```
 
