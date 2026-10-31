@@ -33,8 +33,10 @@ export class CacheModule {
     return {
       global: options.isGlobal || false,
       module: CacheModule,
+      imports: options.imports || [],
       providers: [
         this.createStorageOptionsProvider(options),
+        ...(options.useClass ? [{ provide: options.useClass, useClass: options.useClass }] : []),
         CacheService,
         CacheMetadata,
       ],
@@ -52,7 +54,7 @@ export class CacheModule {
       };
     }
     const inject = [
-      (options.useClass || options.useExisting) as Type<CacheOptions>,
+      (options.useClass || options.useExisting) as Type<CacheAsyncOptionsFactory>,
     ];
 
     return {
