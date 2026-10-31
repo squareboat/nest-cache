@@ -34,7 +34,8 @@ export class RedisDriver implements CacheDriver {
 
   async has(key: string): Promise<boolean> {
     const num = await this.client.exists(`${this.options.prefix}:::${key}`);
-    return !!num;
+    // Number(): with `stringNumbers: true` ioredis returns "0", which is truthy
+    return Number(num) > 0;
   }
 
   async remember<T>(key: string, cb: Function, ttlInSec: number): Promise<T> {
